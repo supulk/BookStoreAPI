@@ -39,7 +39,7 @@ public class BookDAO {
         books.get(7).setId(8);
         books.add(new Book("Atomic Habits", 7, 1505211309, 2018, 11.99, 25));
         books.get(8).setId(9);
-        books.add(new Book("Project Hail Mary", 8, 0503135222, 2021, 14.99, 10));
+        books.add(new Book("Project Hail Mary", 8, 0503135222, 2021, 14.99, 0));
         books.get(9).setId(10);
     }
     

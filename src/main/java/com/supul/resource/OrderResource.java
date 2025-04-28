@@ -7,6 +7,7 @@ package com.supul.resource;
 import com.supul.dao.OrderDAO;
 import com.supul.exception.InvalidInputException;
 import com.supul.model.Order;
+import com.supul.model.Book;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

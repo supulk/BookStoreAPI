@@ -67,6 +67,10 @@ public class BookResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response updateBook(@PathParam("id") int id, Book book) throws Exception{
+        if (id <= 0) {
+            logger.error("Invald book id provided");
+            throw new InvalidInputException("Invald book id provided");
+        }
         if (book == null){
             logger.error("Empty book object provided");
             throw new InvalidInputException("Book object cannot be null");

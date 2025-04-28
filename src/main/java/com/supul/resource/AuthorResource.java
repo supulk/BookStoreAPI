@@ -68,6 +68,10 @@ public class AuthorResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response updateAuthor(@PathParam("id") int id, Author author) throws Exception{
+        if (id <= 0) {
+            logger.error("Invald author id provided");
+            throw new InvalidInputException("Invalid author id provided");
+        }
         if (author == null) {
             logger.error("Empty author object provided");
             throw new InvalidInputException("Author object cannot be null");

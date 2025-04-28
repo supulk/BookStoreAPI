@@ -12,13 +12,14 @@ public class Order {
     private int id;
     private Cart cart;
     private int price;
-    private Customer customer = cart.getCustomer();
+    private Customer customer;
     
     public Order(){}
 
     public Order(Cart cart, int price) {
         this.cart = cart;
         this.price = price;
+        this.customer = cart.getCustomer();
     }
 
     public int getId() {
@@ -47,6 +48,9 @@ public class Order {
     }
 
     public Customer getCustomer() {
+        if(customer == null && cart!= null){
+            customer=cart.getCustomer();
+        }
         return customer;
     }
 }
