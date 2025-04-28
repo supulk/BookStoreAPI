@@ -53,4 +53,12 @@ public class Order {
         }
         return customer;
     }
+    
+    @Override
+    public String toString(){
+        String books;
+        
+        return "Order{id: "+id+", "+"cart: "+
+                "}";
+    }
 }

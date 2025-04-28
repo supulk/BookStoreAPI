@@ -36,7 +36,7 @@ public class CartResource {
             logger.error("invalid customer id provided");
             throw new InvalidInputException("invalid customer id provided");
         }
-        return Response.status(Response.Status.FOUND)
+        return Response.status(Response.Status.OK)
                     .entity(cartDAO.getCart(customerId))
                     .build();
     }

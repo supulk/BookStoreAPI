@@ -70,6 +70,9 @@ public class CartDAO {
     public void addToCart(int customerId, int bookId){
         Cart cart = carts.computeIfAbsent(customerId, key -> new Cart(customerDAO.getCustomerById(key)));
         Book book = bookDAO.getBookById(bookId);
+        if (book == null) {
+            throw new BookNotFoundException("Requested book is not found");
+        }
         if (book.getStock() <= 0) {
             throw new OutOfStockException("Requested book is out of stock");
         }

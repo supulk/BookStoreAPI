@@ -59,6 +59,9 @@ public class BookDAO {
     
     public void addBook(Book book){
         logger.info("Add book : " + book.getTitle());
+        if (book.getId() <= 0 ){
+            book.setId(nextBookId());
+        }
         book.setId(nextBookId());
         books.add(book);
     }

@@ -95,13 +95,14 @@ public class CustomerDAO {
     }
     
     
-    public void deleteCustomer(int id){
+    public Customer deleteCustomer(int id){
         Customer customerToDelete = customers.stream()
                 .filter(current -> current.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new CustomerNotFoundException("Customer with ID " + id + " not found"));
         
         customers.remove(customerToDelete);
+        return customerToDelete;
     }
     
     public int nextCustomerId(){

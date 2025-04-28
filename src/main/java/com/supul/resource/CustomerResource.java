@@ -60,7 +60,7 @@ public class CustomerResource {
             throw new InvalidInputException("empty customer id provided");
         }
         customerDAO.addCustomer(customer);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(Response.Status.CREATED).entity("Customer : "+customer.getName()+" created").build();
     }
     
     @PUT
@@ -68,12 +68,16 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response updateCustomer(@PathParam("id") int id, Customer customer){
+        if (id <= 0) {
+            logger.error("invalid customer id provided");
+            throw new InvalidInputException("invalid customer id provided");
+        }
         if (customer == null) {
             logger.error("empty customer id provided");
             throw new InvalidInputException("empty customer id provided");
         }
         customerDAO.updateCustomer(id, customer);
-        return Response.status(Response.Status.OK).build();
+        return Response.status(Response.Status.OK).entity("Customer : "+customer.getName()+" updated").build();
     }
     
     @DELETE
@@ -83,7 +87,7 @@ public class CustomerResource {
             logger.error("invalid customer id provided");
             throw new InvalidInputException("invalid customer id provided");
         }
-        customerDAO.deleteCustomer(id);
-        return Response.status(Response.Status.OK).build();
+        Customer customer = customerDAO.deleteCustomer(id);
+        return Response.status(Response.Status.OK).entity("Customer : "+customer.getName()+" deleted").build();
     }
 }
