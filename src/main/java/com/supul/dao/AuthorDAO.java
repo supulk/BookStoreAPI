@@ -114,13 +114,14 @@ public class AuthorDAO {
     }
     
     
-    public void deleteAuthor(int id){
+    public Author deleteAuthor(int id){
         Author authorToDelete = authors.stream()
                 .filter(current -> current.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new AuthorNotFoundException("Author with ID " + id + " not found"));
         
         authors.remove(authorToDelete);
+        return authorToDelete;
     }
     
     public List<Book> getBooksOfAuthor(int id){

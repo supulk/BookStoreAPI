@@ -60,7 +60,7 @@ public class AuthorResource {
             throw new InvalidInputException("Author object cannot be null");
         }
         authorDAO.addAuthor(author);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(Response.Status.CREATED).entity("Author : "+author.getName()+" created").build();
     }
     
     @PUT
@@ -77,7 +77,7 @@ public class AuthorResource {
             throw new InvalidInputException("Author object cannot be null");
         }
         authorDAO.updateAuthor(id, author);
-        return Response.status(Response.Status.OK).build();
+        return Response.status(Response.Status.OK).entity("Author : "+author.getName()+" updated").build();
     }
     
     @DELETE
@@ -87,8 +87,8 @@ public class AuthorResource {
             logger.error("Invald author id provided");
             throw new InvalidInputException("Invalid author id provided");
         }
-        authorDAO.deleteAuthor(id);
-        return Response.status(Response.Status.OK).build();
+        Author author = authorDAO.deleteAuthor(id);
+        return Response.status(Response.Status.OK).entity("Author : "+author.getName()+" deleted").build();
     }
     
     @GET
