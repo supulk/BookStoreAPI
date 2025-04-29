@@ -9,6 +9,7 @@ import com.supul.exception.InvalidInputException;
 import com.supul.model.Order;
 import com.supul.model.Book;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -61,16 +62,20 @@ public class OrderResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addOrder(@PathParam("customerId") int customerID, Order order){
+    public Response addOrder(@PathParam("customerId") int customerID, int total, Map<Integer, Integer> orderItems){
         if (customerID <= 0) {
             logger.error("invalid customer id provided");
             throw new InvalidInputException("invalid customer id provided");
         }
-        if (order == null) {
+        if (total <= 0) {
+            logger.error("invalid total provided");
+            throw new InvalidInputException("invalid total provided");
+        }
+        if (orderItems == null) {
             logger.error("Order not provided");
             throw new InvalidInputException("Order not provided");
         }
-        orderDAO.addOrder(customerID, order);
-        return Response.status(Response.Status.CREATED).build();
+        orderDAO.addOrder(customerID, total, orderItems);
+        return Response.status(Response.Status.CREATED).entity("Order created").build();
     }
 }

@@ -4,22 +4,25 @@
  */
 package com.supul.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author Supul
  */
 public class Order {
     private int id;
-    private Cart cart;
-    private int price;
-    private Customer customer;
+    private int customerId;
+    private int total;
+    private Map<Integer, Integer> orderItems = new HashMap<>();
     
     public Order(){}
 
-    public Order(Cart cart, int price) {
-        this.cart = cart;
-        this.price = price;
-        this.customer = cart.getCustomer();
+    public Order(int customerId, int total, Map<Integer, Integer> orderItems) {
+        this.orderItems = orderItems;
+        this.customerId = customerId;
+        this.total = total;
     }
 
     public int getId() {
@@ -29,36 +32,36 @@ public class Order {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public Map<Integer, Integer> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Map<Integer, Integer> orderItems) {
+        this.orderItems = orderItems;
+    }
     
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Customer getCustomer() {
-        if(customer == null && cart!= null){
-            customer=cart.getCustomer();
-        }
-        return customer;
-    }
     
     @Override
     public String toString(){
-        String books;
-        
-        return "Order{id: "+id+", "+"cart: "+
-                "}";
+        return "Items: "+
+                "\n"+orderItems.toString()+
+                "\n"+"Total: "+total;
     }
 }
