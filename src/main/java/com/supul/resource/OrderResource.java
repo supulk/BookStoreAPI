@@ -62,20 +62,40 @@ public class OrderResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addOrder(@PathParam("customerId") int customerID, int total, Map<Integer, Integer> orderItems){
+    public Response addOrder(@PathParam("customerId") int customerID, OrderRequest request){
+        if (request == null || request.getOrderItems() == null || request.getOrderItems().isEmpty()) {
+            logger.error("Order items not provided");
+            throw new InvalidInputException("Order items not provided");
+        }
+        Map<Integer, Integer> orderItems = request.getOrderItems();
         if (customerID <= 0) {
             logger.error("invalid customer id provided");
             throw new InvalidInputException("invalid customer id provided");
-        }
-        if (total <= 0) {
-            logger.error("invalid total provided");
-            throw new InvalidInputException("invalid total provided");
         }
         if (orderItems == null) {
             logger.error("Order not provided");
             throw new InvalidInputException("Order not provided");
         }
-        orderDAO.addOrder(customerID, total, orderItems);
+        orderDAO.addOrder(customerID, orderItems);
         return Response.status(Response.Status.CREATED).entity("Order created").build();
     }
+    
+    static class OrderRequest {
+
+        private Map<Integer, Integer> orderItems;
+        public OrderRequest() {}
+
+        public OrderRequest(Map<Integer, Integer> orderItems) {
+            this.orderItems = orderItems;
+        }
+
+        public Map<Integer, Integer> getOrderItems() {
+            return orderItems;
+        }
+
+        public void setOrderItems(Map<Integer, Integer> orderItems) {
+            this.orderItems = orderItems;
+        }
+    }
+    
 }

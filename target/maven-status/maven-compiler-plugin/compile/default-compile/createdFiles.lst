@@ -3,6 +3,7 @@ com\supul\resource\CustomerResource.class
 com\supul\exception\AuthorNotFoundExceptionMapper.class
 com\supul\resource\BookResource.class
 com\supul\model\Order.class
+com\supul\resource\OrderResource$OrderRequest.class
 com\supul\resource\CartResource.class
 com\supul\exception\CustomerNotFoundException.class
 com\supul\exception\CartNotFoundException.class

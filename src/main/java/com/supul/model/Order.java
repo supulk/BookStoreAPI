@@ -14,15 +14,13 @@ import java.util.Map;
 public class Order {
     private int id;
     private int customerId;
-    private int total;
     private Map<Integer, Integer> orderItems = new HashMap<>();
     
     public Order(){}
 
-    public Order(int customerId, int total, Map<Integer, Integer> orderItems) {
+    public Order(int customerId, Map<Integer, Integer> orderItems) {
         this.orderItems = orderItems;
         this.customerId = customerId;
-        this.total = total;
     }
 
     public int getId() {
@@ -41,13 +39,6 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
 
     public Map<Integer, Integer> getOrderItems() {
         return orderItems;
@@ -61,7 +52,6 @@ public class Order {
     @Override
     public String toString(){
         return "Items: "+
-                "\n"+orderItems.toString()+
-                "\n"+"Total: "+total;
+                "\n"+orderItems.toString();
     }
 }
